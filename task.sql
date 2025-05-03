@@ -1,37 +1,42 @@
-CREATE DATABASE ShopDB;
+-- Створення бази даних
+CREATE DATABASE IF NOT EXISTS ShopDB;
 USE ShopDB;
 
-CREATE TABLE Countries (
-    ID INT,
-    Name VARCHAR(50),
+-- Таблиця Countries: збереження країн, основна таблиця → InnoDB
+CREATE TABLE IF NOT EXISTS Countries (
+    ID INT NOT NULL,
+    Name VARCHAR(50) NOT NULL,
     PRIMARY KEY (ID)
 ) ENGINE=InnoDB;
 
-CREATE TABLE GeoIPCache (
-    ID INT,
-    IPRange VARCHAR(50),
-    CountryID INT,
+-- Таблиця GeoIPCache: кеш IP-діапазонів, висока швидкість, можна втратити дані → MEMORY
+CREATE TABLE IF NOT EXISTS GeoIPCache (
+    ID INT NOT NULL,
+    IPRange VARCHAR(50) NOT NULL,
+    CountryID INT NOT NULL,
     PRIMARY KEY (ID)
 ) ENGINE=MEMORY;
 
-CREATE TABLE ProductDescription (
-    ID INT,
-    Description TEXT,
-    ProductID INT,
-    CountryID INT,
+-- Таблиця ProductDescription: опис товарів, багато читань, важливість збереження → InnoDB
+CREATE TABLE IF NOT EXISTS ProductDescription (
+    ID INT NOT NULL,
+    Description TEXT NOT NULL,
+    ProductID INT NOT NULL,
+    CountryID INT NOT NULL,
     PRIMARY KEY (ID)
 ) ENGINE=InnoDB;
 
-CREATE TABLE Logs (
-    ID INT,
-    Timestamp DATETIME,
-    Message TEXT,
+-- Таблиця Logs: просто приймає записи, збереження не потрібне → BLACKHOLE
+CREATE TABLE IF NOT EXISTS Logs (
+    ID INT NOT NULL,
+    Timestamp DATETIME NOT NULL,
+    Message TEXT NOT NULL,
     PRIMARY KEY (ID)
 ) ENGINE=BLACKHOLE;
 
-CREATE TABLE ProductReporting (
+-- Таблиця ProductReporting: зберігання даних для CSV-експорту → CSV
+CREATE TABLE IF NOT EXISTS ProductReporting (
     Date DATE NOT NULL,
     ProductName VARCHAR(100) NOT NULL,
     Orders INT NOT NULL
 ) ENGINE=CSV;
-
