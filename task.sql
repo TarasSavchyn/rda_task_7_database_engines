@@ -13,7 +13,7 @@ CREATE TABLE GeoIPCache (
     FOREIGN KEY (CountryID) REFERENCES Countries(ID)
 ) ENGINE=MEMORY;
 
-CREATE TABLE ProductDescriptions (
+CREATE TABLE ProductDescription (
     ID INT PRIMARY KEY AUTO_INCREMENT,
     CountryID INT,
     ProductID INT,
