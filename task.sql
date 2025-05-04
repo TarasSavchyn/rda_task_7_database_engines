@@ -34,6 +34,6 @@ CREATE TABLE ReportingData (
 ) ENGINE=InnoDB;
 
 CREATE TABLE ProductReporting (
-    ID INT,
-    ReportData VARCHAR(100)
+    ID INT NOT NULL,
+    ReportData VARCHAR(100) NOT NULL
 ) ENGINE=CSV;
